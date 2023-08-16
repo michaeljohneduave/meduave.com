@@ -1,44 +1,47 @@
 ---
+import Header from "../components/Header.astro";
 import Layout from "../layouts/Layout.astro";
 import { Icon } from "astro-icon";
 ---
 
-<Layout title="Michael Eduave - Software Engineer">
-  <main class="h-screen">
-    <div class="flex flex-col h-full">
-      <div class="flex flex-col gap-5">
-        <h1 class="text-4xl">
-          Under <span class="text-gradient">Construction</span>
-        </h1>
-        <p>
-          Hey there! I'm <span class="text-gradient">Michael Eduave</span> and this
-          is my personal website. I'm currently working on it, so please bear with
-          me. In the meantime, you can check my links below.
-        </p>
-        <div class="flex gap-4">
-          <a
-            class="flex"
-            href="https://www.github.com/michaeljohneduave"
-            target="_blank"
-          >
-            <Icon name="mdi:github" class="h-6" />
-            <span class="text-xl">Github</span>
-          </a>
-          <a
-            class="flex"
-            href="https://www.linkedin.com/in/meduave"
-            target="_blank"
-          >
-            <Icon name="mdi:linkedin" class="h-6" />
-            <span class="text-xl">Linkedin</span>
-          </a>
+<Layout title="Michael Eduave—Software Engineer">
+  <main>
+    <Header />
+    <div class="container mx-auto">
+      <div class="flex flex-col max-h-screen py-10">
+        <div class="flex flex-col gap-5">
+          <span class="text-9xl">Software Engineer</span>
+          <p>
+            Hey there! I'm <span class="text-gradient">Michael Eduave</span> and
+            this is my personal website.
+          </p>
+          <p>
+            I'm currently working on it, so please bear with me. In the
+            meantime, you can check my links below.
+          </p>
+          <div class="flex gap-4">
+            <a
+              class="flex"
+              href="https://www.github.com/michaeljohneduave"
+              target="_blank"
+            >
+              <Icon name="mdi:github" class="h-6" />
+              <span class="text-xl">Github</span>
+            </a>
+            <a
+              class="flex"
+              href="https://www.linkedin.com/in/meduave"
+              target="_blank"
+            >
+              <Icon name="mdi:linkedin" class="h-6" />
+              <span class="text-xl">Linkedin</span>
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="text-sm mt-auto self-center">
-        Built with <a href="https://astro.build" target="_blank">Astro</a> and <a
-          href="https://tailwindcss.com"
-          target="_blank">Tailwind CSS</a
-        >.
+        <div class="text-sm mt-auto self-center">
+          Built with <a href="https://astro.build" target="_blank">Astro</a> and
+          <a href="https://tailwindcss.com" target="_blank">Tailwind CSS</a>.
+        </div>
       </div>
     </div>
   </main>
@@ -48,7 +51,6 @@ import { Icon } from "astro-icon";
   main {
     margin: auto;
     padding: 1rem;
-    width: 800px;
     max-width: calc(100% - 2rem);
     color: white;
     font-size: 20px;
@@ -76,27 +78,6 @@ import { Icon } from "astro-icon";
     -webkit-text-fill-color: transparent;
     background-size: 400%;
     background-position: 0%;
-  }
-  .instructions {
-    margin-bottom: 2rem;
-    border: 1px solid rgba(var(--accent-light), 25%);
-    background: linear-gradient(
-      rgba(var(--accent-dark), 66%),
-      rgba(var(--accent-dark), 33%)
-    );
-    padding: 1.5rem;
-    border-radius: 8px;
-  }
-  .instructions code {
-    font-size: 0.8em;
-    font-weight: bold;
-    background: rgba(var(--accent-light), 12%);
-    color: rgb(var(--accent-light));
-    border-radius: 4px;
-    padding: 0.3em 0.4em;
-  }
-  .instructions strong {
-    color: rgb(var(--accent-light));
   }
   .link-card-grid {
     display: grid;
