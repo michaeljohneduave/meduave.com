@@ -1,6 +1,6 @@
 ---
 import Header from "../components/Header.astro";
-import Project from "../components/Project.astro";
+import Project from "../components/ProjectCard.astro";
 import Layout from "../layouts/Layout.astro";
 import { Icon } from "astro-icon";
 
@@ -35,7 +35,7 @@ export const projects = [
   },
   {
     name: "Micab",
-    description: "A ride-hailing app for taxis in the Philippines.",
+    description: "A ride-hailing platform for taxis in the Philippines.",
     status: "Legacy",
     logo: "micab-logo.jpeg",
     tech: [
@@ -73,8 +73,8 @@ export const projects = [
       <div class="flex flex-col gap-5">
         <span class="text-9xl">Software Engineer</span>
         <p>
-          Hey there! I'm <span class="text-gradient">Michael Eduave</span> and this
-          is my personal website.
+          Hey there! I'm <span class="text-gradient">Michael Eduave</span> and
+          this is my personal website.
         </p>
         <p>
           I'm currently working on it, so please bear with me. In the meantime,
@@ -108,7 +108,7 @@ export const projects = [
           </a>
         </div>
       </div>
-      <div class="text-4xl">Projects:</div>
+      <div class="text-4xl">Work:</div>
       <div class="flex flex-wrap">
         {
           projects
