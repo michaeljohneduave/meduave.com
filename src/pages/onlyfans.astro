@@ -7,12 +7,11 @@ const redis = new Redis({
   token: import.meta.env.REDIS_TOKEN,
 });
 const cookies = Astro.cookies.get("astro");
-const data = await redis.sadd("visitors", cookies);
-let count = await redis.get("visits");
-if (data === 1) {
-  count = await redis.incr("visits");
-}
-export const prerender = false;
+const [, count] = await Promise.all([
+  redis.sadd("visitors", cookies),
+  redis.scard("visitors"),
+]);
+export const prerender = true;
 ---
 
 <Layout title="Michael's OnlyFans">
