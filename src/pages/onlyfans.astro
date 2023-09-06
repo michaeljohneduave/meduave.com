@@ -11,7 +11,7 @@ const [, count] = await Promise.all([
   redis.sadd("visitors", cookies),
   redis.scard("visitors"),
 ]);
-export const prerender = true;
+export const prerender = false;
 ---
 
 <Layout title="Michael's OnlyFans">
