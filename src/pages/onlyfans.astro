@@ -12,6 +12,7 @@ let count = await redis.get("visits");
 if (data === 1) {
   count = await redis.incr("visits");
 }
+export const prerender = false;
 ---
 
 <Layout title="Michael's OnlyFans">
