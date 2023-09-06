@@ -1,0 +1,34 @@
+---
+import { Icon } from "astro-icon";
+import { Image } from "astro:assets";
+
+import ofIcon from "../../public/ofIcon.svg";
+---
+
+<div class="text-4xl">Links:</div>
+<div class="flex gap-4">
+  <a
+    class="flex"
+    href="https://www.github.com/michaeljohneduave"
+    target="_blank"
+  >
+    <Icon name="mdi:github" class="h-6" />
+    <span class="text-xl">Github</span>
+  </a>
+  <a class="flex" href="https://www.linkedin.com/in/meduave" target="_blank">
+    <Icon name="mdi:linkedin" class="h-6" />
+    <span class="text-xl">Linkedin</span>
+  </a>
+  <a
+    class="flex"
+    href="https://leetcode.com/michaeljohneduave/"
+    target="_blank"
+  >
+    <Icon name="simple-icons:leetcode" class="h-6" />
+    <span class="text-xl">Leetcode</span>
+  </a>
+  <a class="flex" href="/onlyfans">
+    <Image src={ofIcon} alt="onlyfans" class="h-6" />
+    <span class="text-xl">Onlyfans 🙀</span>
+  </a>
+</div>

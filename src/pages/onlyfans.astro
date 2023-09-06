@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Redis } from "@upstash/redis";
+
+const redis = new Redis({
+  url: "https://generous-moose-35451.upstash.io",
+  token: import.meta.env.REDIS_TOKEN,
+});
+const cookies = Astro.cookies.get("astro");
+const data = await redis.sadd("visitors", cookies);
+let count = await redis.get("visits");
+if (data === 1) {
+  count = await redis.incr("visits");
+}
+---
+
+<Layout title="Michael's OnlyFans">
+  <main class="container text-white">
+    <div class="text-xl text-center">
+      <span class="text-4xl">{count}</span>
+      <p>people have been here looking for my OnlyFans page.😸</p>
+    </div>
+  </main>
+</Layout>
