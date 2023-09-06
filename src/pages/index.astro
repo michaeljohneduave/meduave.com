@@ -72,7 +72,7 @@ export const projects = [
   },
 ];
 
-const cookie = randomStr(500);
+const cookie = randomStr(20);
 
 if (!Astro.cookies.get("astro")) {
   Astro.cookies.set("astro", cookie, {
