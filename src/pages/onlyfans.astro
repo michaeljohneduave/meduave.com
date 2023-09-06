@@ -1,24 +1,12 @@
 ---
+import OFCount from "../components/OFCount.astro";
 import Layout from "../layouts/Layout.astro";
-import { createClient } from "@vercel/kv";
-
-const kv = createClient({
-  url: import.meta.env.KV_REST_API_URL,
-  token: import.meta.env.KV_REST_API_TOKEN,
-});
-
-const cookies = Astro.cookies.get("astro");
-const [, count] = await Promise.all([
-  kv.sadd("visitors", cookies),
-  kv.scard("visitors"),
-]);
-export const prerender = false;
 ---
 
 <Layout title="Michael's OnlyFans">
   <main class="container text-white">
     <div class="text-xl text-center">
-      <span class="text-4xl">{count}</span>
+      <OFCount />
       <p>people have been here looking for my OnlyFans page.😸</p>
     </div>
   </main>

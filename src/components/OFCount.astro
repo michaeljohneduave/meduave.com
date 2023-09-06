@@ -1,0 +1,15 @@
+---
+import { createClient } from "@vercel/kv";
+
+const kv = createClient({
+  url: import.meta.env.KV_REST_API_URL,
+  token: import.meta.env.KV_REST_API_TOKEN,
+});
+
+const cookies = Astro.cookies.get("astro");
+await kv.sadd("visitors", cookies);
+const count = await kv.scard("visitors");
+export const prerender = false;
+---
+
+<span class="text-4xl">{count}</span>
