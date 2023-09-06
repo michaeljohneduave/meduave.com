@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.0.0",
+    "@astrojs/vercel": "^4.0.3",
+    "@types/node": "^20.5.9",
+    "@upstash/redis": "^1.22.0",
     "astro": "^3.0.3",
     "astro-icon": "^0.8.1",
     "sharp": "^0.32.5",
