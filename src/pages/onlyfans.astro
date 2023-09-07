@@ -1,12 +1,12 @@
 ---
-import OFCount from "../components/OFCount.astro";
 import Layout from "../layouts/Layout.astro";
+import OFCount from "../components/OFCount.tsx";
 ---
 
 <Layout title="Michael's OnlyFans">
   <main class="container text-white">
     <div class="text-xl text-center">
-      <OFCount />
+      <OFCount client:visible />
       <p>people have been here looking for my OnlyFans page.😸</p>
     </div>
   </main>
