@@ -83,9 +83,9 @@ if (!Astro.cookies.get("astro")) {
 
 <Layout title="Michael Eduave—Software Engineer">
   <Header />
-  <div class="flex flex-col py-10 h-full gap-y-10">
-    <div class="flex flex-col gap-5">
-      <span class="text-9xl">Software Engineer</span>
+  <div class="flex flex-col py-10 h-full gap-y-2">
+    <div class="flex flex-col gap-2 sm:gap-5">
+      <span class="text-4xl sm:text-7xl lg:text-8xl">Software Engineer</span>
       <p>
         Hey there! I'm <span class="text-gradient">Michael Eduave</span> and
         this is my personal website.
@@ -94,16 +94,17 @@ if (!Astro.cookies.get("astro")) {
         I'm currently working on it, so please bear with me. In the meantime,
         you can check my links below.
       </p>
+      <div class="text-4xl text-slate-300">Links:</div>
       <Links />
     </div>
-    <div class="text-4xl">Work:</div>
+    <div class="text-4xl text-slate-300">Work:</div>
     <div class="flex flex-wrap">
       {
         projects
           .filter((p) => p.show)
           .map((project) => {
             return (
-              <div class="w-2/6">
+              <div class="w-full sm:w-2/6">
                 <Project {...project} />
               </div>
             );
