@@ -1,14 +1,29 @@
 ---
+import { clsx } from "clsx";
 const { name, description, status, logo } = Astro.props;
 ---
 
 <div class="p-4 hover:bg-white hover:bg-opacity-5 rounded-md">
   <div>
-    <img class="border-0 h-20 w-20 object-cover" src={logo} alt={name} />
+    <img
+      class="border-0 object-cover"
+      height={80}
+      width={80}
+      src={logo}
+      alt={name}
+      loading="lazy"
+    />
   </div>
   <div class="text-3xl">
     <span>{name}</span>
   </div>
   <p>{description}</p>
-  <span>Status: <span class="text-slate-300">{status}</span></span>
+  <span
+    >Status: <span
+      class={clsx(
+        status === "Legacy" && "text-slate-300",
+        status === "In development" && "text-green-300",
+      )}>{status}</span
+    ></span
+  >
 </div>
