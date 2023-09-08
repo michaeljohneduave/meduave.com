@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
 
-export default function OFCount() {
-  const [count, setCount] = React.useState(0);
+export default function OFCount({ initCount }: { initCount: number }) {
+  const [count, setCount] = React.useState(initCount);
   useEffect(() => {
     async function getCount() {
       const res = await fetch("/api/visit", {

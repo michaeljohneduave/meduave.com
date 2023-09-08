@@ -1,12 +1,21 @@
 ---
+import { createClient } from "@vercel/kv";
 import Layout from "../layouts/Layout.astro";
 import OFCount from "../components/OFCount.tsx";
+
+const kv = createClient({
+  url: import.meta.env.KV_REST_API_URL,
+  token: import.meta.env.KV_REST_API_TOKEN,
+});
+
+const data = await kv.scard("visitors");
+console.log(data);
 ---
 
 <Layout title="Michael's OnlyFans">
   <main class="container text-white">
     <div class="text-xl text-center">
-      <OFCount client:visible />
+      <OFCount client:visible initCount={data} />
       <p>people have been here looking for my OnlyFans page.😸</p>
     </div>
   </main>
