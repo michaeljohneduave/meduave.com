@@ -3,7 +3,6 @@ import Header from "../components/Header.astro";
 import Links from "../components/Links.astro";
 import Project from "../components/ProjectCard.astro";
 import Layout from "../layouts/Layout.astro";
-import { randomStr } from "../utils/random";
 export const projects = [
   {
     name: "Streaks",
@@ -72,15 +71,19 @@ export const projects = [
   },
 ];
 
-const cookie = randomStr(20);
-
-if (!Astro.cookies.get("astro")) {
-  Astro.cookies.set("astro", cookie, {
-    httpOnly: true,
-  });
-}
+export const prerender = true;
 ---
 
+<script>
+  import { randomStr } from "../utils/random";
+  const cookie = randomStr(20);
+
+  if (!Astro.cookies.get("astro")) {
+    Astro.cookies.set("astro", cookie, {
+      httpOnly: true,
+    });
+  }
+</script>
 <Layout title="Michael Eduave—Software Engineer">
   <Header />
   <div class="flex flex-col py-10 h-full gap-y-2">
