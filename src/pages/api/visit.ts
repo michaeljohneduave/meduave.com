@@ -8,27 +8,38 @@ const kv = createClient({
 });
 
 export const POST: APIRoute = async ({ cookies }) => {
-  let cookie = cookies.get("astro")?.value;
-  let count = await kv.scard("visitors");
-
-  if (!cookie) {
-    cookie = randomStr(200);
-
-    cookies.set("astro", cookies, {
-      httpOnly: true,
-    });
-
-    count += 1;
-  }
-
-  kv.sadd("visitors", cookie);
-
-  return new Response(
-    JSON.stringify({
-      count,
-    }),
-    {
-      status: 200,
+  try {
+    let cookie = cookies.get("astro")?.value;
+    let count;
+    if (!cookie) {
+      cookie = randomStr(200);
+      cookies.set("astro", cookie, {
+        path: "/",
+        httpOnly: true,
+        maxAge: 60 * 60 * 24 * 365 * 10,
+      });
     }
-  );
+    await kv.sadd("visitors", cookie);
+    count = await kv.scard("visitors");
+
+    return new Response(
+      JSON.stringify({
+        count,
+      }),
+      {
+        status: 200,
+      }
+    );
+  } catch (e) {
+    console.error(e);
+
+    return new Response(
+      JSON.stringify({
+        count: 0,
+      }),
+      {
+        status: 200,
+      }
+    );
+  }
 };
