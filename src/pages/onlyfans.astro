@@ -9,6 +9,8 @@ const kv = createClient({
 });
 
 const data = await kv.scard("visitors");
+
+export const prerender = false;
 ---
 
 <Layout title="Michael's OnlyFans">
