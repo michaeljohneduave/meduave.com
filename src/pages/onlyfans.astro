@@ -2,14 +2,20 @@
 import { createClient } from "@vercel/kv";
 import Layout from "../layouts/Layout.astro";
 import OFCount from "../components/OFCount.tsx";
+import { randomStr } from "../utils/random";
 
 const kv = createClient({
   url: import.meta.env.KV_REST_API_URL,
   token: import.meta.env.KV_REST_API_TOKEN,
 });
 
-const data = await kv.scard("visitors");
+if (!Astro.cookies.get("astro")) {
+  Astro.cookies.set("astro", randomStr(200), {
+    maxAge: 60 * 60 * 24 * 365,
+  });
+}
 
+const data = await kv.scard("visitors");
 export const prerender = false;
 ---
 
