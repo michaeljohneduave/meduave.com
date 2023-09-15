@@ -1,0 +1,48 @@
+---
+import { clsx } from "clsx";
+import projectMetadata from "../pages/projects/metadata.json";
+import { Image } from "astro:assets";
+export const projects = projectMetadata;
+---
+
+<div class="text-4xl text-slate-300">Work:</div>
+<div class="flex flex-wrap">
+  {
+    projects
+      .filter((p) => p.show)
+      .map(({ name, status, slug, logo, description }) => {
+        return (
+          <div class="w-full sm:w-2/6">
+            <a href={`/projects/${slug}`}>
+              <div class="py-4 px-1 sm:p-4 sm:hover:bg-white sm:hover:bg-opacity-5 rounded-md">
+                <div>
+                  <Image
+                    class="border-0 object-cover"
+                    height={80}
+                    width={80}
+                    src={logo}
+                    alt={name}
+                  />
+                </div>
+                <div class="text-3xl">
+                  <span>{name}</span>
+                </div>
+                <p>{description}</p>
+                <span>
+                  Status:{" "}
+                  <span
+                    class={clsx(
+                      status === "Legacy" && "text-slate-300",
+                      status === "In development" && "text-green-300",
+                    )}
+                  >
+                    {status}
+                  </span>
+                </span>
+              </div>
+            </a>
+          </div>
+        );
+      })
+  }
+</div>

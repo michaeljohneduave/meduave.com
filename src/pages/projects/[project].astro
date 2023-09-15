@@ -1,0 +1,73 @@
+---
+import type { GetStaticPaths } from "astro";
+import Header from "../../components/Header2.astro";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import projects from "./metadata.json";
+import Footer from "../../components/Footer.astro";
+export const getStaticPaths = (() => {
+  return projects
+    .filter((p) => p.show)
+    .map((project) => {
+      return {
+        params: {
+          project: project.slug,
+        },
+      };
+    });
+}) satisfies GetStaticPaths;
+
+type Project = (typeof projects)[number];
+
+const { project } = Astro.params;
+// TODOS: Maybe use typescript features to avoid this?
+const data: Project | undefined = projects.find((p) => p.slug === project);
+export const prerender = true;
+---
+
+<Layout title="Michael Eduave—Software Engineer">
+  <Header />
+  <div class="flex flex-col py-10 h-full gap-y-2">
+    <p class="text-5xl">
+      <Image
+        height="100"
+        width="100"
+        src={`/${data?.logo || ""}`}
+        alt={`${data?.name} logo`}
+      />
+      <span>{data?.name}</span>
+    </p>
+    <p>{data?.fullDescription || data?.description}</p>
+    <div class="flex gap-x-2">
+      <div class="w-full md:w-1/2">
+        {
+          data?.screenshot && (
+            <div>
+              <p class="text-2xl">Preview:</p>
+              <a href={data?.url} target="_blank">
+                <Image
+                  class="rounded-lg"
+                  height="900"
+                  width="1600"
+                  src={`/${data?.screenshot || ""}`}
+                  alt={`${data?.name} preview screenshot`}
+                />
+              </a>
+            </div>
+          )
+        }
+      </div>
+      <div class="w-full md:w-1/2">
+        <p class="text-2xl">Tech Used:</p>
+        <div class="flex flex-wrap gap-1">
+          {
+            data?.tech?.map((t) => (
+              <span class="rounded-lg bg-slate-800 p-2">{t}</span>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <Footer />
+  </div>
+</Layout>

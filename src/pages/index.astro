@@ -1,75 +1,11 @@
 ---
+import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Links from "../components/Links.astro";
-import Project from "../components/ProjectCard.astro";
-import Layout from "../layouts/Layout.astro";
-export const projects = [
-  {
-    name: "Streaks",
-    description: "Yet another habit tracking app.",
-    status: "In development",
-    logo: "streaks-white.svg",
-    show: true,
-  },
-  {
-    name: "Specter Talent",
-    description: "Weekly index for the best talent in the startup world.",
-    status: "Legacy",
-    logo: "talent-logo.svg",
-    show: true,
-  },
-  {
-    name: "Dash Cam Platform",
-    description: "A platform for dash cam videos.",
-    status: "TBA",
-    logo: "dashcam.svg",
-    show: false,
-  },
-  {
-    name: "Rate My Portfolio",
-    description: "A platform for rating portfolios.",
-    status: "TBA",
-    logo: "portfolio.svg",
-    show: false,
-  },
-  {
-    name: "Rolochef",
-    description: "A recipe sharing app for chefs.",
-    status: "TBA",
-    logo: "rolochef.svg",
-    show: false,
-  },
-  {
-    name: "Micab",
-    description: "A ride-hailing platform for taxis in the Philippines.",
-    status: "Legacy",
-    logo: "micab.png",
-    tech: [
-      "logos:nodejs-icon",
-      "logos:express",
-      "logos:react",
-      "logos:redux",
-      "logos:mongodb",
-      "logos:redis",
-      "logos:elasticsearch",
-      "logos:kibana",
-      "logos:nginx",
-      "logos:docker-icon",
-      "logos:aws",
-      "logos:digital-ocean",
-      "logos:google-cloud",
-      "logos:google-maps",
-    ],
-    show: true,
-  },
-  {
-    name: "Micargo",
-    description: "Last mile delivery app for logistics in the Philippines.",
-    status: "Legacy",
-    logo: "micargo-logo.svg",
-    show: true,
-  },
-];
+import Projects from "../components/ProjectList.astro";
+import Skills from "../components/Skills.astro";
+import Footer from "../components/Footer.astro";
+import Header2 from "../components/Header2.astro";
 
 export const prerender = true;
 ---
@@ -90,23 +26,8 @@ export const prerender = true;
       <div class="text-4xl text-slate-300">Links:</div>
       <Links />
     </div>
-    <div class="text-4xl text-slate-300">Work:</div>
-    <div class="flex flex-wrap">
-      {
-        projects
-          .filter((p) => p.show)
-          .map((project) => {
-            return (
-              <div class="w-full sm:w-2/6">
-                <Project {...project} />
-              </div>
-            );
-          })
-      }
-    </div>
-    <div class="mt-auto self-center">
-      Built with <a href="https://astro.build" target="_blank">Astro</a> and
-      <a href="https://tailwindcss.com" target="_blank">Tailwind CSS</a>.
-    </div>
+    <Projects />
+    <Skills />
+    <Footer />
   </div>
 </Layout>

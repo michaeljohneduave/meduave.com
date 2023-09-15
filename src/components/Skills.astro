@@ -1,0 +1,18 @@
+---
+export const skills = [
+  "Typescript",
+  "React",
+  "NodeJS",
+  "PostgreSQL",
+  "GraphQL",
+  "Docker",
+  "Kubernetes",
+  "AWS",
+  "Google APIs",
+];
+---
+
+<div class="text-4xl text-slate-300">Technical Skills and Tools:</div>
+<div class="flex flex-wrap gap-1">
+  {skills.map((s) => <span class="rounded-lg bg-slate-800 p-2">{s}</span>)}
+</div>
