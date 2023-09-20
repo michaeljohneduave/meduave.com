@@ -11,6 +11,9 @@ export default defineConfig({
   adapter: vercel({
     webAnalytics: {
       enabled: true,
-    }
+    },
+    speedInsights: {
+      enabled: true,
+    },
   })
 });
