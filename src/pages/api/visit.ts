@@ -1,16 +1,24 @@
-import { createClient } from "@vercel/kv";
 import type { APIRoute } from "astro";
-
-const kv = createClient({
-  url: import.meta.env.KV_REST_API_URL,
-  token: import.meta.env.KV_REST_API_TOKEN,
-});
 
 export const POST: APIRoute = async ({ cookies }) => {
   try {
     let cookie = cookies.get("astro")?.value;
-    await kv.sadd("visitors", cookie);
-    const count = await kv.scard("visitors");
+
+    await fetch(import.meta.env.KV_REST_API_URL + "/sadd/visitors/" + cookie, {
+      headers: {
+        Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
+      },
+    });
+
+    const res = await fetch(
+      import.meta.env.KV_REST_API_URL + "/scard/visitors",
+      {
+        headers: {
+          Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
+        },
+      }
+    );
+    const { result: count } = await res.json();
 
     return new Response(
       JSON.stringify({

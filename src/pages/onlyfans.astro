@@ -1,13 +1,7 @@
 ---
-import { createClient } from "@vercel/kv";
 import Layout from "../layouts/Layout.astro";
 import OFCount from "../components/OFCount.tsx";
 import { randomStr } from "../utils/random";
-
-const kv = createClient({
-  url: import.meta.env.KV_REST_API_URL,
-  token: import.meta.env.KV_REST_API_TOKEN,
-});
 
 if (!Astro.cookies.get("astro")) {
   Astro.cookies.set("astro", randomStr(200), {
@@ -15,7 +9,13 @@ if (!Astro.cookies.get("astro")) {
   });
 }
 
-const data = await kv.scard("visitors");
+const res = await fetch(import.meta.env.KV_REST_API_URL + "/scard/visitors", {
+  headers: {
+    Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
+  },
+});
+const { result: data } = await res.json();
+
 export const prerender = false;
 ---
 
