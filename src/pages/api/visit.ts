@@ -1,6 +1,5 @@
 import { createClient } from "@vercel/kv";
 import type { APIRoute } from "astro";
-import { randomStr } from "../../utils/random";
 
 const kv = createClient({
   url: import.meta.env.KV_REST_API_URL,

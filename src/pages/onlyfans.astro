@@ -22,7 +22,7 @@ export const prerender = false;
 <Layout title="Michael's OnlyFans">
   <main class="container text-white">
     <div class="text-xl text-center">
-      <OFCount client:visible initCount={data} />
+      <OFCount client:only="react" initCount={data} />
       <p>people have been here looking for my OnlyFans page.😸</p>
     </div>
   </main>
