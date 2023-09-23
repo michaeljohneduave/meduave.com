@@ -1,20 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import OFCount from "../components/OFCount.tsx";
-// import { randomStr } from "../utils/random";
+import { randomStr } from "../utils/random";
 
-// if (!Astro.cookies.get("astro")) {
-//   Astro.cookies.set("astro", randomStr(200), {
-//     maxAge: 60 * 60 * 24 * 365,
-//   });
-// }
+if (!Astro.cookies.get("astro")) {
+  Astro.cookies.set("astro", randomStr(200), {
+    maxAge: 60 * 60 * 24 * 365,
+  });
+}
 
-// const res = await fetch(import.meta.env.KV_REST_API_URL + "/scard/visitors", {
-//   headers: {
-//     Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
-//   },
-// });
-// const { result: data } = await res.json();
+const res = await fetch(import.meta.env.KV_REST_API_URL + "/scard/visitors", {
+  headers: {
+    Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
+  },
+});
+const { result: data } = await res.json();
 
 export const prerender = false;
 ---
@@ -22,7 +22,7 @@ export const prerender = false;
 <Layout title="Michael's OnlyFans">
   <main class="container text-white">
     <div class="text-xl text-center">
-      <OFCount client:only="react" initCount={24} />
+      <OFCount client:only="react" initCount={data} />
       <p>people have been here looking for my OnlyFans page.😸</p>
     </div>
   </main>
