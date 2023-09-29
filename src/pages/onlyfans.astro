@@ -6,6 +6,7 @@ import { randomStr } from "../utils/random";
 if (!Astro.cookies.get("astro")) {
   Astro.cookies.set("astro", randomStr(200), {
     maxAge: 60 * 60 * 24 * 365,
+    expires: new Date(+new Date() + 60 * 60 * 24 * 365 * 1000),
   });
 }
 
