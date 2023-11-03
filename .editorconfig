@@ -1,2 +1,4 @@
 [*]
 indent_size = 2
+tab_width = 2
+print_width = 80
