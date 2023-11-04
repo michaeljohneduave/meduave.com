@@ -3,27 +3,34 @@ import Layout from "../layouts/Layout.astro";
 import { randomStr } from "../utils/random";
 
 let cookie = Astro.cookies.get("astro")?.value;
-
+const t = new URL(Astro.request.url).searchParams.get("t");
 if (!cookie) {
   cookie = randomStr(200);
   Astro.cookies.set("astro", cookie, {
     maxAge: 60 * 60 * 24 * 365,
     expires: new Date(+new Date() + 60 * 60 * 24 * 365 * 1000),
   });
+
+  await fetch(import.meta.env.KV_REST_API_URL + "/sadd/visitors/" + cookie, {
+    headers: {
+      Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
+    },
+  });
 }
 
-await fetch(import.meta.env.KV_REST_API_URL + "/sadd/visitors/" + cookie, {
-  headers: {
-    Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
-  },
-});
+let data = 0;
 
-const res = await fetch(import.meta.env.KV_REST_API_URL + "/scard/visitors", {
-  headers: {
-    Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
-  },
-});
-const { result: data } = await res.json();
+if (!t) {
+  const res = await fetch(import.meta.env.KV_REST_API_URL + "/scard/visitors", {
+    headers: {
+      Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
+    },
+  });
+
+  const json = await res.json();
+
+  data = json.result;
+}
 ---
 
 <Layout title="Michael's OnlyFans">
