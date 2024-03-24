@@ -1,9 +1,51 @@
 [
   {
+    "name": "Gumboot Friday",
+    "description": "A dashboard for the Gumboot Friday program.",
+    "status": "In Development",
+    "logo": "gumboot-friday.svg",
+    "screenshot": "gumboot-friday-ss.png",
+    "slug": "gumboot-friday",
+    "url": "",
+    "tech": [
+      "Typescript",
+      "React",
+      "SST",
+      "Tailwind",
+      "MaterialUI",
+      "SolidJS",
+      "AWS Lambda",
+      "AWS DynamoDB"
+    ],
+    "show": true
+  },
+  {
+    "name": "Rankfolio",
+    "description": "A hobby project that scrapes portfolios, performs lighthouse audit.",
+    "status": "In Development",
+    "logo": "rankfolio.svg",
+    "screenshot": "rankfolio-ss.png",
+    "slug": "rankfolio",
+    "url": "https://rankfolio.meduave.com",
+    "tech": [
+      "Typescript",
+      "React",
+      "Tailwind",
+      "SST",
+      "AWS Lambda",
+      "AWS S3",
+      "AWS DynamoDB",
+      "Puppeteer",
+      "Github API",
+      "Lighthouse"
+    ],
+    "show": true
+  },
+  {
     "name": "Streaks",
     "description": "Yet another habit tracking app.",
     "fullDescription": "Yet another habit tracking app. This time, it's personal.",
-    "status": "In development",
+    "status": "Legacy",
     "logo": "streaks-white.svg",
     "screenshot": "streaks-ss.png",
     "slug": "streaks",

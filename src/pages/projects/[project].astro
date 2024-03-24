@@ -25,7 +25,10 @@ const data: Project | undefined = projects.find((p) => p.slug === project);
 export const prerender = true;
 ---
 
-<Layout title="Michael Eduave—Software Engineer">
+<Layout
+  title="Michael Eduave—Software Engineer"
+  description={data?.description || ""}
+>
   <Header />
   <div class="flex flex-col py-10 h-full gap-y-2">
     <p class="text-5xl">
