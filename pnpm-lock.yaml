@@ -34,6 +34,9 @@ dependencies:
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
+  isbot:
+    specifier: ^5.1.2
+    version: 5.1.2
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -2227,6 +2230,11 @@ packages:
     engines: {node: '>=16'}
     dependencies:
       is-docker: 3.0.0
+    dev: false
+
+  /isbot@5.1.2:
+    resolution: {integrity: sha512-Yk2X9QhmhzyxKx4JYfeanqxODxDc2CoU38/uymjkvW/CYww6GPH8e65sOuLz0SIkFjW6pCg/iM6vLdohzA4WOQ==}
+    engines: {node: '>=18'}
     dev: false
 
   /isexe@2.0.0:

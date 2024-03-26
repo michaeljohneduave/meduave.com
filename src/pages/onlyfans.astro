@@ -1,9 +1,21 @@
 ---
+import { isbot } from "isbot";
 import Layout from "../layouts/Layout.astro";
 import { randomStr } from "../utils/random";
 
 let cookie = Astro.cookies.get("astro")?.value;
 const t = new URL(Astro.request.url).searchParams.get("t");
+const ua = Astro.request.headers.get("User-Agent");
+
+if (isbot(ua)) {
+  return new Response("🤖🍑", {
+    status: 200,
+    headers: {
+      "Content-Type": "text/plain",
+    },
+  });
+}
+
 if (!cookie) {
   cookie = randomStr(200);
   Astro.cookies.set("astro", cookie, {
@@ -33,7 +45,7 @@ if (!t) {
 }
 ---
 
-<Layout title="Michael's OnlyFans">
+<Layout title="Michael's OnlyFans" description="🤖🍑">
   <main class="container text-white">
     <div class="text-xl text-center">
       <span class="text-4xl">{data}</span>
