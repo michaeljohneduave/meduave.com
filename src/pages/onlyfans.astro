@@ -7,16 +7,7 @@ let cookie = Astro.cookies.get("astro")?.value;
 const t = new URL(Astro.request.url).searchParams.get("t");
 const ua = Astro.request.headers.get("User-Agent");
 
-if (isbot(ua)) {
-  return new Response("🤖🍑", {
-    status: 200,
-    headers: {
-      "Content-Type": "text/plain",
-    },
-  });
-}
-
-if (!cookie) {
+if (!cookie && !isbot(ua)) {
   cookie = randomStr(200);
   Astro.cookies.set("astro", cookie, {
     maxAge: 60 * 60 * 24 * 365,
