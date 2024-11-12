@@ -1,10 +1,10 @@
 [
   {
     "name": "Gumboot Friday",
-    "description": "A dashboard for the Gumboot Friday program.",
+    "description": "Web dashboard for the Gumboot Friday initiative by the I Am Hope foundation (Contract work)",
     "status": "In Development",
-    "logo": "gumboot-friday.svg",
-    "screenshot": "gumboot-friday-ss.png",
+    "logo": "gbf.svg",
+    "screenshot": null,
     "slug": "gumboot-friday",
     "url": "",
     "tech": [
@@ -22,9 +22,9 @@
   {
     "name": "Rankfolio",
     "description": "A hobby project that scrapes portfolios, performs lighthouse audit.",
-    "status": "In Development",
+    "status": "Paused",
     "logo": "rankfolio.svg",
-    "screenshot": "rankfolio-ss.png",
+    "screenshot": null,
     "slug": "rankfolio",
     "url": "https://rankfolio.meduave.com",
     "tech": [
@@ -37,7 +37,7 @@
       "AWS DynamoDB",
       "Puppeteer",
       "Github API",
-      "Lighthouse"
+      "Google Lighthouse"
     ],
     "show": true
   },
