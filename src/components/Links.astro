@@ -4,39 +4,42 @@ import { Icon } from "astro-icon";
 import ofIcon from "../../public/ofIcon.svg";
 ---
 
-<div class="flex flex-wrap gap-4">
-  <a
-    class="flex"
-    href="https://www.github.com/michaeljohneduave"
-    target="_blank"
-  >
-    <Icon name="mdi:github" class="h-6" />
-    <span class="text-xl">Github</span>
-  </a>
-  <a class="flex" href="https://www.linkedin.com/in/meduave" target="_blank">
-    <Icon name="mdi:linkedin" class="h-6" />
-    <span class="text-xl">Linkedin</span>
-  </a>
-  <a class="flex" href="https://leetcode.com/mikedcheck" target="_blank">
-    <Icon name="simple-icons:leetcode" class="h-6" />
-    <span class="text-xl">Leetcode 🫠</span>
-  </a>
-  <a
-    class="flex"
-    href="https://docs.google.com/document/d/1-_UxjmX1hs-f2wTtZK1d6LnzRyjwNrEzFegVd0Vkf1A"
-    target="_blank"
-  >
-    <Icon name="mdi:resume" class="h-6" />
-    <span class="text-xl">Resume</span>
-  </a>
-  <a class="flex" href="/onlyfans">
-    <img
-      src={ofIcon.src}
-      alt="onlyfans"
-      height={24}
-      width={24}
-      loading="lazy"
-    />
-    <span class="text-xl">Onlyfans 🙀</span>
-  </a>
+<div>
+  <div class="text-4xl text-slate-300">Links:</div>
+  <div class="flex flex-wrap gap-4">
+    <a
+      class="flex"
+      href="https://www.github.com/michaeljohneduave"
+      target="_blank"
+    >
+      <Icon name="mdi:github" class="h-6" />
+      <span class="text-xl">Github</span>
+    </a>
+    <a class="flex" href="https://www.linkedin.com/in/meduave" target="_blank">
+      <Icon name="mdi:linkedin" class="h-6" />
+      <span class="text-xl">Linkedin</span>
+    </a>
+    <a class="flex" href="https://leetcode.com/mikedcheck" target="_blank">
+      <Icon name="simple-icons:leetcode" class="h-6" />
+      <span class="text-xl">Leetcode 🫠</span>
+    </a>
+    <a
+      class="flex"
+      href="https://docs.google.com/document/d/1F8A6x38766uIJkqiUG4fqfYRseaE9qP6Vu8ptHDzBZc"
+      target="_blank"
+    >
+      <Icon name="mdi:resume" class="h-6" />
+      <span class="text-xl">Resume</span>
+    </a>
+    <a class="flex" href="/onlyfans">
+      <img
+        src={ofIcon.src}
+        alt="onlyfans"
+        height={24}
+        width={24}
+        loading="lazy"
+      />
+      <span class="text-xl">Onlyfans 🙀</span>
+    </a>
+  </div>
 </div>

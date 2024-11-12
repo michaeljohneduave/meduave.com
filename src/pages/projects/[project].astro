@@ -32,12 +32,16 @@ export const prerender = true;
   <Header />
   <div class="flex flex-col py-10 h-full gap-y-2">
     <p class="text-5xl">
-      <Image
-        height="100"
-        width="100"
-        src={`/${data?.logo || ""}`}
-        alt={`${data?.name} logo`}
-      />
+      {
+        data?.logo && (
+          <Image
+            height="100"
+            width="100"
+            src={`/${data.logo}`}
+            alt={`${data.name} logo`}
+          />
+        )
+      }
       <span>{data?.name}</span>
     </p>
     <p>{data?.fullDescription || data?.description}</p>
