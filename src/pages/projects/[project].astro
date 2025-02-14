@@ -30,7 +30,7 @@ export const prerender = true;
   description={data?.description || ""}
 >
   <Header />
-  <div class="flex flex-col py-10 h-full gap-y-2">
+  <div class="flex flex-col pt-10 h-full gap-y-2">
     <p class="text-5xl">
       {
         data?.logo && (
@@ -46,24 +46,22 @@ export const prerender = true;
     </p>
     <p>{data?.fullDescription || data?.description}</p>
     <div class="flex flex-wrap gap-5">
-      <div class="w-full md:w-1/3">
-        {
-          data?.screenshot && (
-            <div>
-              <p class="text-2xl">Preview:</p>
-              <a href={data?.url} target="_blank">
-                <Image
-                  class="rounded-lg"
-                  height="900"
-                  width="1600"
-                  src={`/${data?.screenshot || ""}`}
-                  alt={`${data?.name} preview screenshot`}
-                />
-              </a>
-            </div>
-          )
-        }
-      </div>
+      {
+        data?.screenshot && (
+          <div class="w-full md:w-1/3">
+            <p class="text-2xl">Preview:</p>
+            <a href={data?.url} target="_blank">
+              <Image
+                class="rounded-lg"
+                height="900"
+                width="1600"
+                src={`/${data?.screenshot || ""}`}
+                alt={`${data?.name} preview screenshot`}
+              />
+            </a>
+          </div>
+        )
+      }
       <div class="w-full md:w-1/2">
         <p class="text-2xl">Tech Used:</p>
         <div class="flex flex-wrap gap-1">
