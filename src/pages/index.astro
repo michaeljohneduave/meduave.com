@@ -13,14 +13,13 @@ export const prerender = true;
   fetch("/onlyfans?t=true");
 </script>
 <Layout title="Michael Eduave—Software Engineer">
-  <Header />
-  <div class="flex flex-col py-10 h-full gap-y-5">
-    <div class="flex flex-col gap-2 sm:gap-5">
-      <span class="text-4xl sm:text-7xl lg:text-8xl">Software Engineer</span>
+  <div class="flex flex-col">
+    <Header />
+    <div class="flex flex-col pt-10 gap-y-5 grow">
       <Links />
+      <Projects />
+      <!-- <Skills /> -->
+      <Footer />
     </div>
-    <Projects />
-    <Skills />
-    <Footer />
   </div>
 </Layout>
