@@ -1,7 +1,7 @@
 [
   {
     "name": "Hugin Bot",
-    "description": "A personal chatbot with RAG and multi-modal capabilities",
+    "description": "I'm building this bot to help me understand more about companies I want to join and learn GenAI along the way.",
     "status": "In Development",
     "logo": "hugin-bot.png",
     "screenshot": null,
