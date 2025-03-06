@@ -1,5 +1,23 @@
 [
   {
+    "name": "Hugin Bot",
+    "description": "A personal chatbot with RAG and multi-modal capabilities",
+    "status": "In Development",
+    "logo": "hugin-bot.png",
+    "screenshot": null,
+    "slug": "hugin-bot",
+    "url": "",
+    "tech": [
+      "AWS",
+      "SST",
+      "Google Gemini",
+      "React",
+      "PostgreSQL",
+      "pgvector"
+    ],
+    "show": true
+  },
+  {
     "name": "Gumboot Friday",
     "description": "Web dashboard for the Gumboot Friday initiative by the I Am Hope foundation (Contract work)",
     "status": "In Development",
