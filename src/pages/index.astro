@@ -7,13 +7,15 @@ import Skills from "../components/Skills.astro";
 import Layout from "../layouts/Layout.astro";
 
 export const prerender = true;
+export const name = "Michael Eduave";
+export const description = "Software Engineer";
 ---
 
 <script>
   fetch("/onlyfans?t=true");
 </script>
-<Layout title="Michael Eduave" description="Software Engineer">
-  <Header />
+<Layout title={name} description={description}>
+  <Header name={name} description={description} />
   <div class="flex flex-col pt-5 gap-y-5 grow">
     <p>
       Hi, I'm Michael, and I'm passionate about writing high-quality code. I

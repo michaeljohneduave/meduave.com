@@ -1,18 +1,22 @@
 ---
 import { Image } from "astro:assets";
 import profileImage from "../../public/profile-pic.jpg";
+
+interface Props {
+  name: string;
+  description: string;
+}
+const { name, description } = Astro.props;
 ---
 
 <div class="flex items-center text-2xl">
   <Image
     src={profileImage}
-    alt="Michael Eduave"
+    alt={name}
     class="h-40 w-40 object-cover rounded-full"
   />
   <div class="ml-5 flex flex-col">
-    <span class="text-5xl">Michael Eduave</span>
-    <span class="text-base"
-      >Software Engineer | Full Snack Developer | Proompt Ingenieur 🤪</span
-    >
+    <span class="text-5xl">{name}</span>
+    <span class="text-base">{description}</span>
   </div>
 </div>
