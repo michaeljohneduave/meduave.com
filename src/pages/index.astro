@@ -1,10 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Links from "../components/Links.astro";
 import Projects from "../components/ProjectList.astro";
 import Skills from "../components/Skills.astro";
-import Footer from "../components/Footer.astro";
+import Layout from "../layouts/Layout.astro";
 
 export const prerender = true;
 ---
@@ -12,10 +12,7 @@ export const prerender = true;
 <script>
   fetch("/onlyfans?t=true");
 </script>
-<Layout
-  title="Michael Eduave"
-  description="Software Engineer | Full Snack Developer | Proompt Ingenieur 🤪"
->
+<Layout title="Michael Eduave" description="Software Engineer">
   <Header />
   <div class="flex flex-col pt-5 gap-y-5 grow">
     <p>
