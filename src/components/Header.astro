@@ -9,14 +9,14 @@ interface Props {
 const { name, description } = Astro.props;
 ---
 
-<div class="flex items-center text-2xl">
+<div class="flex flex-col md:flex-row items-center text-center md:text-left">
   <Image
     src={profileImage}
     alt={name}
-    class="h-40 w-40 object-cover rounded-full"
+    class="h-32 w-32 md:h-40 md:w-40 object-cover rounded-full mb-4 md:mb-0"
   />
-  <div class="ml-5 flex flex-col">
-    <span class="text-5xl">{name}</span>
+  <div class="md:ml-5 flex flex-col">
+    <span class="text-4xl md:text-5xl">{name}</span>
     <span class="text-base">{description}</span>
   </div>
 </div>

@@ -15,7 +15,7 @@ const links = [
     url: "https://www.linkedin.com/in/meduave",
   },
   {
-    name: "Leetcode 💀",
+    name: "Leetcode",
     icon: "simple-icons:leetcode",
     url: "https://leetcode.com/mikedcheck",
   },
@@ -38,21 +38,27 @@ const links = [
 ---
 
 <div>
-  <div class="flex flex-wrap gap-4 px-4">
+  <div class="flex flex-wrap gap-3 sm:gap-4 px-2 sm:px-4">
     {
       links.map((link) => (
-        <a href={link.url} class="flex gap-1" target="_blank">
+        <a
+          href={link.url}
+          class="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors hover:bg-white/5 active:bg-white/10"
+          target="_blank"
+        >
           {link.icon ? (
-            <Icon name={link.icon} class="h-6" />
+            <Icon name={link.icon} class="h-5 w-5 sm:h-6 sm:w-6" />
           ) : (
             <img
               src={link.img}
               alt={link.name}
-              class="w-6 h-6"
+              class="h-5 w-5 sm:h-6 sm:w-6"
               loading="lazy"
             />
           )}
-          <span class="text-xl">{link.name}</span>
+          <span class="text-base sm:text-xl whitespace-nowrap">
+            {link.name}
+          </span>
         </a>
       ))
     }

@@ -18,7 +18,7 @@ const { title, description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ViewTransitions />
-    <script defer src="/_vercel/insights/script.js"></script>
+    {import.meta.env.PROD && <script defer src="/_vercel/insights/script.js" />}
   </head>
   <body>
     <main class="container mx-auto p-4 text-white h-screen flex">

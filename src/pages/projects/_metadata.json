@@ -64,7 +64,7 @@
     "description": "Yet another habit tracking app.",
     "fullDescription": "Yet another habit tracking app. This time, it's personal.",
     "status": "Legacy",
-    "logo": "streaks-white.svg",
+    "logo": "streaks-logo.svg",
     "screenshot": "streaks-ss.png",
     "slug": "streaks",
     "url": "https://streaks.meduave.com",
