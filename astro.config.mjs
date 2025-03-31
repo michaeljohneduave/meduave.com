@@ -1,6 +1,6 @@
-import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/serverless";
+import { defineConfig, envField } from 'astro/config';
 
 import react from "@astrojs/react";
 
@@ -15,5 +15,17 @@ export default defineConfig({
     speedInsights: {
       enabled: true,
     },
-  })
+  }),
+  env: {
+    schema: {
+      TURNSTILE_SITE_KEY: envField.string({
+        context: "client",
+        access: "public",
+      }),
+      TURNSTILE_SECRET_KEY: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+    },
+  },
 });
