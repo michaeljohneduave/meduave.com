@@ -1,9 +1,20 @@
 ---
 import { Icon } from "astro-icon";
 
-import ofIcon from "../../public/ofIcon.svg";
+import ofLogoDark from "../../public/of-logo-dark.svg";
+import ofLogoLight from "../../public/of-logo-light.svg";
 
-const links = [
+interface Link {
+  name: string;
+  icon?: string;
+  img?: {
+    light: string;
+    dark: string;
+  };
+  url: string;
+}
+
+const links: Link[] = [
   {
     name: "Github",
     icon: "mdi:github",
@@ -31,7 +42,10 @@ const links = [
   },
   {
     name: "Onlyfans 💦",
-    img: ofIcon.src,
+    img: {
+      light: ofLogoLight.src,
+      dark: ofLogoDark.src,
+    },
     url: "/onlyfans",
   },
 ];
@@ -48,14 +62,22 @@ const links = [
         >
           {link.icon ? (
             <Icon name={link.icon} class="h-5 w-5 sm:h-6 sm:w-6" />
-          ) : (
-            <img
-              src={link.img}
-              alt={link.name}
-              class="h-5 w-5 sm:h-6 sm:w-6"
-              loading="lazy"
-            />
-          )}
+          ) : link.img ? (
+            <>
+              <img
+                src={link.img.light}
+                alt={link.name}
+                class="h-5 w-5 sm:h-6 sm:w-6 block dark:hidden"
+                loading="lazy"
+              />
+              <img
+                src={link.img.dark}
+                alt={link.name}
+                class="h-5 w-5 sm:h-6 sm:w-6 hidden dark:block"
+                loading="lazy"
+              />
+            </>
+          ) : null}
           <span class="text-base sm:text-xl whitespace-nowrap">
             {link.name}
           </span>
