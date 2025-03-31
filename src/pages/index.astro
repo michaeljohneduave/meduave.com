@@ -14,7 +14,7 @@ const cfToken = Astro.request.headers.get("cf-turnstile-response");
 if (cfToken) {
   // Verify the Turnstile token
   const formData = new URLSearchParams();
-  formData.append("secret", import.meta.env.TURNSTILE_SECRET_KEY);
+  formData.append("secret", import.meta.env.VITE_TURNSTILE_SECRET_KEY);
   formData.append("response", cfToken);
 
   const result = await fetch(

@@ -39,7 +39,7 @@ export default function Turnstile({ onVerify, onError }: TurnstileProps) {
       
       // Render Turnstile widget
       widgetIdRef.current = window.turnstile.render(containerRef.current, {
-        sitekey: import.meta.env.TURNSTILE_SITE_KEY,
+        sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY,
         callback: (token: string) => {
           onVerify(token);
         },
