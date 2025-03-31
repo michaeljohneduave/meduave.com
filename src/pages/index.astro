@@ -3,11 +3,34 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Links from "../components/Links.astro";
 import Projects from "../components/ProjectList.astro";
+import Turnstile from "../components/Turnstile";
 import Layout from "../layouts/Layout.astro";
 
-export const prerender = true;
 export const name = "Michael Eduave";
 export const description = "Software Engineer";
+
+const cfToken = Astro.request.headers.get("cf-turnstile-response");
+
+if (cfToken) {
+  // Verify the Turnstile token
+  const formData = new URLSearchParams();
+  formData.append("secret", import.meta.env.TURNSTILE_SECRET_KEY);
+  formData.append("response", cfToken);
+
+  const result = await fetch(
+    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+    {
+      body: formData,
+      method: "POST",
+    }
+  );
+
+  const outcome = await result.json();
+  if (outcome.success) {
+    // Handle successful verification
+    console.log("Turnstile verified!");
+  }
+}
 ---
 
 <script>
@@ -23,6 +46,15 @@ export const description = "Software Engineer";
       opportunity to work on and build products that make a positive impact on
       people and the world.
     </p>
+    <div class="flex justify-center">
+      <Turnstile
+        client:load
+        onVerify={(token) => {
+          // The token will be sent with the next request
+          console.log("Turnstile verified!");
+        }}
+      />
+    </div>
     <Links />
     <Projects />
     <Footer />
