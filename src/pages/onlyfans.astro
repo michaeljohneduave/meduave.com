@@ -14,9 +14,9 @@ if (!cookie && !isbot(ua)) {
     expires: new Date(+new Date() + 60 * 60 * 24 * 365 * 1000),
   });
 
-  await fetch(import.meta.env.KV_REST_API_URL + "/sadd/visitors/" + cookie, {
+  await fetch(`${import.meta.env.KV_REST_API_URL}/sadd/visitors/${cookie}`, {
     headers: {
-      Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
+      Authorization: `Bearer ${import.meta.env.KV_REST_API_TOKEN}`,
     },
   });
 }
@@ -24,9 +24,9 @@ if (!cookie && !isbot(ua)) {
 let data = 0;
 
 if (!t) {
-  const res = await fetch(import.meta.env.KV_REST_API_URL + "/scard/visitors", {
+  const res = await fetch(`${import.meta.env.KV_REST_API_URL}/scard/visitors`, {
     headers: {
-      Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
+      Authorization: `Bearer ${import.meta.env.KV_REST_API_TOKEN}`,
     },
   });
 
@@ -37,8 +37,8 @@ if (!t) {
 ---
 
 <Layout title="Michael's OnlyFans" description="🤖🍑">
-  <main class="container text-white">
-    <div class="text-xl text-center">
+  <main class="container">
+    <div class="text-xl text-center dark:text-white text-gray-900">
       <span class="text-4xl">{data}</span>
       <p>people have been here looking for my OnlyFans page.😸</p>
     </div>

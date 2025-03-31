@@ -1,5 +1,7 @@
 ---
 import { ViewTransitions } from "astro:transitions";
+import ThemeToggle from "../components/ThemeToggle";
+
 interface Props {
   title: string;
   description: string;
@@ -17,20 +19,52 @@ const { title, description } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <ViewTransitions />
+    <!-- ViewTransitions disabled temporarily to fix theme toggle flash -->
+    <!-- <ViewTransitions /> -->
     {import.meta.env.PROD && <script defer src="/_vercel/insights/script.js" />}
+    <style is:global>
+      /* Utility class to disable transitions temporarily */
+      .no-transition * {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      /* Ensure theme changes happen instantly */
+      html,
+      html * {
+        transition-property: none !important;
+      }
+
+      /* Only allow transitions for hover effects and animations that are not theme-related */
+      .allow-transition {
+        transition-property: transform, opacity !important;
+      }
+    </style>
+    <script is:inline>
+      // Immediately invoked function to set theme
+      (function () {
+        // Check for saved theme or use system preference as fallback
+        const theme =
+          localStorage.getItem("theme") ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+
+        // Apply theme immediately to prevent flash
+        document.documentElement.classList.toggle("dark", theme === "dark");
+      })();
+    </script>
   </head>
-  <body>
-    <main class="container mx-auto p-4 text-white h-screen flex">
+  <body class="dark:bg-dark-bg bg-white">
+    <div class="fixed top-5 right-5 z-50">
+      <ThemeToggle client:only="react" />
+    </div>
+    <main
+      class="container mx-auto p-4 text-slate-900 dark:text-white h-screen flex"
+    >
       <div class="flex flex-col grow">
         <slot />
       </div>
     </main>
-    <style is:global>
-      html {
-        font-family: system-ui, sans-serif;
-        background: #13151a;
-      }
-    </style>
   </body>
 </html>

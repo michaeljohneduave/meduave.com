@@ -3,7 +3,10 @@
     "name": "Hugin Bot",
     "description": "I'm building this bot to help me understand more about companies I want to join and learn GenAI along the way. rng-vibe-coding the frontend",
     "status": "In Development",
-    "logo": "hugin-bot.png",
+    "logo": {
+      "light": "hugin-bot.png",
+      "dark": "hugin-bot.png"
+    },
     "screenshot": null,
     "slug": "hugin-bot",
     "url": "",
@@ -11,17 +14,21 @@
       "AWS",
       "SST",
       "Google Gemini",
-      "React",
-      "PostgreSQL",
-      "pgvector"
+      "Vue",
+      "DynamoDB",
+      "Redis",
+      "PostgreSQL"
     ],
     "show": true
   },
   {
     "name": "Gumboot Friday",
-    "description": "Web dashboard for the Gumboot Friday initiative by the I Am Hope foundation (Contract work)",
+    "description": "Web dashboard for the Gumboot Friday initiative by the I Am Hope foundation",
     "status": "In Development",
-    "logo": "gbf.svg",
+    "logo": {
+      "light": "gbf-logo-light.svg",
+      "dark": "gbf-logo-dark.svg"
+    },
     "screenshot": null,
     "slug": "gumboot-friday",
     "url": "",
@@ -41,7 +48,10 @@
     "name": "Rankfolio",
     "description": "A hobby project that scrapes portfolios, performs lighthouse audit.",
     "status": "Paused",
-    "logo": "rankfolio.svg",
+    "logo": {
+      "light": "rankfolio.svg",
+      "dark": "rankfolio.svg"
+    },
     "screenshot": null,
     "slug": "rankfolio",
     "url": "https://rankfolio.meduave.com",
@@ -64,7 +74,10 @@
     "description": "Yet another habit tracking app.",
     "fullDescription": "Yet another habit tracking app. This time, it's personal.",
     "status": "Legacy",
-    "logo": "streaks-logo.svg",
+    "logo": {
+      "light": "streaks-light.svg",
+      "dark": "streaks-dark.svg"
+    },
     "screenshot": "streaks-ss.png",
     "slug": "streaks",
     "url": "https://streaks.meduave.com",
@@ -82,7 +95,10 @@
     "name": "Specter Talent",
     "description": "Weekly index for the best talent in the startup world.",
     "status": "Legacy",
-    "logo": "talent-logo.svg",
+    "logo": {
+      "light": "talent-logo.svg",
+      "dark": "talent-logo.svg"
+    },
     "screenshot": "specter-talent-ss.png",
     "slug": "specter-talent",
     "url": "https://www.tryspecter.com/talent-signals/",
@@ -99,7 +115,10 @@
     "name": "Dash Cam Platform",
     "description": "A platform for dash cam videos.",
     "status": "TBA",
-    "logo": "dashcam.svg",
+    "logo": {
+      "light": "dashcam.svg",
+      "dark": "dashcam.svg"
+    },
     "slug": "dash-cam-platform",
     "show": false
   },
@@ -107,7 +126,10 @@
     "name": "Rate My Portfolio",
     "description": "A platform for rating portfolios.",
     "status": "TBA",
-    "logo": "portfolio.svg",
+    "logo": {
+      "light": "portfolio.svg",
+      "dark": "portfolio.svg"
+    },
     "slug": "rate-my-portfolio",
     "show": false
   },
@@ -115,7 +137,10 @@
     "name": "Rolochef",
     "description": "A recipe sharing app for chefs.",
     "status": "TBA",
-    "logo": "rolochef.svg",
+    "logo": {
+      "light": "rolochef.svg",
+      "dark": "rolochef.svg"
+    },
     "slug": "rolochef",
     "show": false
   },
@@ -123,7 +148,10 @@
     "name": "Micab",
     "description": "A ride-hailing platform for taxis in the Philippines.",
     "status": "Legacy",
-    "logo": "micab.png",
+    "logo": {
+      "light": "micab.png",
+      "dark": "micab.png"
+    },
     "tech": [
       "Javascript",
       "Typescript",
@@ -146,7 +174,10 @@
     "name": "Micargo",
     "description": "Last mile delivery app.",
     "status": "Legacy",
-    "logo": "micargo-logo.svg",
+    "logo": {
+      "light": "micargo-logo.svg",
+      "dark": "micargo-logo.svg"
+    },
     "tech": [
       "Javascript",
       "Typescript",
