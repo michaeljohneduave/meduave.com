@@ -54,7 +54,6 @@
     },
     "screenshot": null,
     "slug": "rankfolio",
-    "url": "https://rankfolio.meduave.com",
     "tech": [
       "Typescript",
       "React",
@@ -80,7 +79,6 @@
     },
     "screenshot": "streaks-ss.png",
     "slug": "streaks",
-    "url": "https://streaks.meduave.com",
     "tech": [
       "Typescript",
       "React",
