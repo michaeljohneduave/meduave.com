@@ -1,44 +1,19 @@
 ---
 import { randomUUID } from "node:crypto";
-import { TURNSTILE_SECRET_KEY } from "astro:env/server";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Links from "../components/Links.astro";
 import Projects from "../components/ProjectList.astro";
-import Turnstile from "../components/Turnstile.astro";
 import Layout from "../layouts/Layout.astro";
 
 export const name = "Michael Eduave";
 export const description = "Software Engineer";
 
-const cfToken = Astro.request.headers.get("cf-turnstile-response");
-
-if (cfToken) {
-  // Verify the Turnstile token
-  const formData = new URLSearchParams();
-  formData.append("secret", TURNSTILE_SECRET_KEY);
-  formData.append("response", cfToken);
-
-  const result = await fetch(
-    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-    {
-      body: formData,
-      method: "POST",
-    }
-  );
-
-  const outcome = await result.json();
-  if (outcome.success) {
-    // Handle successful verification
-    console.log("Turnstile verified!");
-  }
-
-  const cookie = randomUUID();
-  Astro.cookies.set("astro", cookie, {
-    maxAge: 60 * 60 * 24 * 365,
-    expires: new Date(+new Date() + 60 * 60 * 24 * 365 * 1000),
-  });
-}
+const cookie = randomUUID();
+Astro.cookies.set("astro", cookie, {
+  maxAge: 60 * 60 * 24 * 365 * 1000,
+  expires: new Date(+new Date() + 60 * 60 * 24 * 365 * 1000),
+});
 ---
 
 <script>
@@ -53,33 +28,8 @@ if (cfToken) {
       and apply better techniques, driven by the goal of building products that
       genuinely benefit people and contribute positively to the world.
     </p>
-    <div class="flex justify-center">
-      <!-- <Turnstile /> -->
-    </div>
     <Links />
     <Projects />
     <Footer />
   </div>
 </Layout>
-
-<script>
-  // Define the custom event type
-  interface TurnstileVerifyEvent extends CustomEvent {
-    detail: {
-      token: string;
-    };
-  }
-
-  // Listen for Turnstile verification events
-  window.addEventListener("turnstile:verify", ((
-    event: TurnstileVerifyEvent
-  ) => {
-    const token = event.detail.token;
-    console.log("Turnstile verified!");
-    // You can use the token here if needed
-  }) as EventListener);
-
-  window.addEventListener("turnstile:error", (() => {
-    console.log("Turnstile verification failed!");
-  }) as EventListener);
-</script>
