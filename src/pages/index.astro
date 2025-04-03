@@ -1,4 +1,5 @@
 ---
+import { randomUUID } from "node:crypto";
 import { TURNSTILE_SECRET_KEY } from "astro:env/server";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
@@ -31,11 +32,17 @@ if (cfToken) {
     // Handle successful verification
     console.log("Turnstile verified!");
   }
+
+  const cookie = randomUUID();
+  Astro.cookies.set("astro", cookie, {
+    maxAge: 60 * 60 * 24 * 365,
+    expires: new Date(+new Date() + 60 * 60 * 24 * 365 * 1000),
+  });
 }
 ---
 
 <script>
-  fetch("/onlyfans?t=true");
+  fetch("/onlyfans?homepage=true");
 </script>
 <Layout title={name} description={description}>
   <Header name={name} description={description} />
