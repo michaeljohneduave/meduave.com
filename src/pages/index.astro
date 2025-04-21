@@ -9,11 +9,7 @@ import Layout from "../layouts/Layout.astro";
 export const name = "Michael Eduave";
 export const description = "Software Engineer";
 
-const cookie = randomUUID();
-Astro.cookies.set("astro", cookie, {
-  maxAge: 60 * 60 * 24 * 365 * 1000,
-  expires: new Date(+new Date() + 60 * 60 * 24 * 365 * 1000),
-});
+export const prerender = true;
 ---
 
 <script>
