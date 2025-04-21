@@ -1,6 +1,6 @@
 ---
-import { Image } from "astro:assets";
-import profileImage from "../../public/profile-pic.jpg";
+import { Picture } from "astro:assets";
+import profileImage from "../assets/profile-pic.jpg";
 
 interface Props {
   name: string;
@@ -10,9 +10,10 @@ const { name, description } = Astro.props;
 ---
 
 <div class="flex flex-col md:flex-row items-center text-center md:text-left">
-  <Image
+  <Picture
     src={profileImage}
     alt={name}
+    formats={["avif", "webp"]}
     class="h-32 w-32 md:h-40 md:w-40 object-cover rounded-full mb-4 md:mb-0"
   />
   <div class="md:ml-5 flex flex-col">
