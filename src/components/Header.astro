@@ -14,7 +14,9 @@ const { name, description } = Astro.props;
     src={profileImage}
     alt={name}
     formats={["avif", "webp"]}
+    widths={[128, 160]}
     class="h-32 w-32 md:h-40 md:w-40 object-cover rounded-full mb-4 md:mb-0"
+    loading="lazy"
   />
   <div class="md:ml-5 flex flex-col">
     <span class="text-4xl md:text-5xl">{name}</span>
