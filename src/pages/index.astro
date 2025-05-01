@@ -104,10 +104,10 @@ const workExperiences = [
               Currently working on projects using TypeScript, React, AWS, and exploring GenAI applications.
             </p>
             <p class="flex gap-1.5 justify-center md:justify-start mt-1.5 text-xs text-gray-500 dark:text-gray-400">
-              <a target="_blank" href="https://linkedin.com/in/meduave">LinkedIn</a> | 
-              <a target="_blank" href="/cv.pdf">CV</a> | 
-              <a target="_blank" href="/of">OF</a> | 
-              <a target="_blank" href="https://github.com/michaeljohneduave">Github</a>
+              <a target="_blank" href="https://linkedin.com/in/meduave" aria-label="LinkedIn link">LinkedIn</a> | 
+              <a target="_blank" href="/cv.pdf" aria-label="CV link">CV</a> | 
+              <a target="_blank" href="/of" aria-label="OF link">OF</a> | 
+              <a target="_blank" href="https://github.com/michaeljohneduave" aria-label="Github link">Github</a>
             </p>
           </div>
         </div>
@@ -140,7 +140,7 @@ const workExperiences = [
               <div class="flex gap-3 md:items-start md:gap-4 rounded-md p-2.5">
                 {/* Logo */}
                 <div class="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-lg dark:bg-gray-800 bg-gray-50 relative">
-                  <a href={url} target="_blank" rel="noopener noreferrer" >
+                  <a href={url} target="_blank" rel="noopener noreferrer" aria-label={`Project link to ${name}`}>
                     {lightLogoImage && (
                       <Image
                         class="border-0 object-contain block dark:hidden"
@@ -174,14 +174,14 @@ const workExperiences = [
                 </div>
                 {/* Text Content */}
                 <div class="text-left">
-                  <a target="_blank" href={url}>
+                  <a target="_blank" href={url} aria-label={`Project link to ${name}`}>
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-200">{name}</h3>
                   <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-300">
                     {description}
                   </p>
                   <p class="text-xs mt-1">
                     {github && (
-                      <a class="flex gap-1 text-gray-500 dark:text-gray-400" target="_blank" href={github}>
+                      <a class="flex gap-1 text-gray-500 dark:text-gray-400" target="_blank" href={github} aria-label={`GitHub link to ${name}`}>
                         Github <Icon name="mdi:external-link" class="text-gray-500 dark:text-gray-400 h-4 w-4 self-center" />
                       </a>
                     )}
