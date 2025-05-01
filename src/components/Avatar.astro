@@ -208,8 +208,6 @@ import avatar from "../assets/mike-pp.png";
 
     // Handle theme changes
     const observer = new MutationObserver(() => {
-      console.log("Theme changed, scratched areas:", scratchedPixels.size);
-
       // Reset the canvas with new theme color
       setupCanvas();
 
