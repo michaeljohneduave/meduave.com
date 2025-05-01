@@ -1,0 +1,178 @@
+---
+import { Image } from "astro:assets";
+import avatar from "../assets/mike-pp.png";
+---
+
+<div
+  class="relative flex h-28 w-28 flex-col items-center justify-center rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700"
+>
+  <div
+    id="scratch-container"
+    class="relative w-full h-full rounded-xl overflow-hidden"
+  >
+    <!-- Avatar image (hidden initially) -->
+    <Image
+      id="avatar-image"
+      src={avatar}
+      alt="Michael Eduave"
+      widths={[256, 640]}
+      sizes={`(max-width: 430px) 256px, 640px`}
+      class="h-full w-full aspect-square transition-transform duration-300 rounded-xl scale-[0.99]"
+      loading="lazy"
+    />
+    <canvas
+      id="scratch-canvas"
+      class="absolute top-0 left-0 w-full h-full z-10 eraser-cursor"
+      width="256"
+      height="256"></canvas>
+
+    <style>
+      .eraser-cursor {
+        cursor:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 20H7L3 16c-.7-.7-.7-1.8 0-2.5L14.5 2c.7-.7 1.8-.7 2.5 0l4 4c.7.7.7 1.8 0 2.5L9.5 20'%3E%3C/path%3E%3C/svg%3E")
+            2 22,
+          auto;
+      }
+
+      .dark .eraser-cursor {
+        cursor:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 20H7L3 16c-.7-.7-.7-1.8 0-2.5L14.5 2c.7-.7 1.8-.7 2.5 0l4 4c.7.7.7 1.8 0 2.5L9.5 20'%3E%3C/path%3E%3C/svg%3E")
+            2 22,
+          auto;
+      }
+    </style>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("scratch-container");
+    const canvasElement = document.getElementById(
+      "scratch-canvas",
+    ) as HTMLCanvasElement;
+    const image = document.getElementById("avatar-image");
+
+    if (!container || !canvasElement || !image) return;
+
+    const ctx = canvasElement.getContext("2d");
+    if (!ctx) return;
+
+    let isDrawing = false;
+    const brushRadius = 30; // Size of the scratch brush
+
+    // Set up the canvas with the overlay
+    function setupCanvas() {
+      // Set canvas dimensions to match container
+      canvasElement.width = container!.offsetWidth;
+      canvasElement.height = container!.offsetHeight;
+
+      // Fill with scratch-off color based on theme
+      const isDarkMode = document.documentElement.classList.contains("dark");
+      ctx!.fillStyle = isDarkMode ? "#1f2937" : "#f3f4f6";
+      ctx!.fillRect(0, 0, canvasElement.width, canvasElement.height);
+
+      // Draw the placeholder elements on the canvas
+      const centerX = canvasElement.width / 2;
+      const centerY = canvasElement.height / 2 - 8;
+
+      // Draw avatar placeholder circle
+      ctx!.beginPath();
+      ctx!.arc(centerX, centerY - 8, 15, 0, Math.PI * 2);
+      ctx!.fillStyle = isDarkMode ? "#4b5563" : "#d1d5db";
+      ctx!.fill();
+
+      // Draw name placeholder rectangle
+      ctx!.beginPath();
+      ctx!.roundRect(centerX - 20, centerY + 12, 40, 30, 3);
+      ctx!.fillStyle = isDarkMode ? "#4b5563" : "#d1d5db";
+      ctx!.fill();
+    }
+
+    // Get mouse/touch position relative to canvas
+    function getPosition(event: MouseEvent | TouchEvent) {
+      const rect = canvasElement.getBoundingClientRect();
+
+      // Handle both mouse and touch events
+      if (event.type.includes("touch")) {
+        const touchEvent = event as TouchEvent;
+        return {
+          x: touchEvent.touches[0].clientX - rect.left,
+          y: touchEvent.touches[0].clientY - rect.top,
+        };
+      } else {
+        const mouseEvent = event as MouseEvent;
+        return {
+          x: mouseEvent.clientX - rect.left,
+          y: mouseEvent.clientY - rect.top,
+        };
+      }
+    }
+
+    // Scratch function to reveal the image
+    function scratch(x: number, y: number) {
+      ctx!.globalCompositeOperation = "destination-out";
+      ctx!.beginPath();
+      ctx!.arc(x, y, brushRadius, 0, Math.PI * 2);
+      ctx!.fill();
+    }
+
+    // Event handlers
+    function handleStart(event: MouseEvent | TouchEvent) {
+      isDrawing = true;
+      const pos = getPosition(event);
+      scratch(pos.x, pos.y);
+
+      // Prevent scrolling on touch devices
+      if (event.type === "touchstart") {
+        event.preventDefault();
+      }
+    }
+
+    function handleMove(event: MouseEvent | TouchEvent) {
+      if (!isDrawing) return;
+
+      const pos = getPosition(event);
+      scratch(pos.x, pos.y);
+
+      // Prevent scrolling on touch devices
+      if (event.type === "touchmove") {
+        event.preventDefault();
+      }
+    }
+
+    function handleEnd() {
+      isDrawing = false;
+    }
+
+    // Add event listeners
+    canvasElement.addEventListener("mousedown", handleStart as EventListener);
+    canvasElement.addEventListener("mousemove", handleMove as EventListener);
+    canvasElement.addEventListener("mouseup", handleEnd);
+    canvasElement.addEventListener("mouseleave", handleEnd);
+
+    // Touch events
+    canvasElement.addEventListener("touchstart", handleStart as EventListener, {
+      passive: false,
+    });
+    canvasElement.addEventListener("touchmove", handleMove as EventListener, {
+      passive: false,
+    });
+    canvasElement.addEventListener("touchend", handleEnd);
+    canvasElement.addEventListener("touchcancel", handleEnd);
+
+    // Handle theme changes
+    const observer = new MutationObserver(() => {
+      setupCanvas();
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    // Initialize canvas
+    setupCanvas();
+
+    // Resize handling
+    window.addEventListener("resize", setupCanvas);
+  });
+</script>
