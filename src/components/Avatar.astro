@@ -60,15 +60,30 @@ import avatar from "../assets/mike-pp.png";
     let isDrawing = false;
     const brushRadius = 30; // Size of the scratch brush
 
+    // Theme-specific colors
+    const themeColors = {
+      light: {
+        background: "#f3f4f6", // Light gray background
+        placeholder: "#d1d5db", // Lighter gray for placeholders
+      },
+      dark: {
+        background: "#1f2937", // Dark gray background
+        placeholder: "#4b5563", // Medium gray for placeholders
+      },
+    };
+
     // Set up the canvas with the overlay
     function setupCanvas() {
       // Set canvas dimensions to match container
       canvasElement.width = container!.offsetWidth;
       canvasElement.height = container!.offsetHeight;
 
-      // Fill with scratch-off color based on theme
+      // Get current theme colors
       const isDarkMode = document.documentElement.classList.contains("dark");
-      ctx!.fillStyle = isDarkMode ? "#1f2937" : "#f3f4f6";
+      const currentTheme = isDarkMode ? themeColors.dark : themeColors.light;
+
+      // Fill with scratch-off color based on theme
+      ctx!.fillStyle = currentTheme.background;
       ctx!.fillRect(0, 0, canvasElement.width, canvasElement.height);
 
       // Draw the placeholder elements on the canvas
@@ -78,13 +93,13 @@ import avatar from "../assets/mike-pp.png";
       // Draw avatar placeholder circle
       ctx!.beginPath();
       ctx!.arc(centerX, centerY - 8, 15, 0, Math.PI * 2);
-      ctx!.fillStyle = isDarkMode ? "#4b5563" : "#d1d5db";
+      ctx!.fillStyle = currentTheme.placeholder;
       ctx!.fill();
 
       // Draw name placeholder rectangle
       ctx!.beginPath();
       ctx!.roundRect(centerX - 20, centerY + 12, 40, 30, 3);
-      ctx!.fillStyle = isDarkMode ? "#4b5563" : "#d1d5db";
+      ctx!.fillStyle = currentTheme.placeholder;
       ctx!.fill();
     }
 
@@ -108,13 +123,7 @@ import avatar from "../assets/mike-pp.png";
       }
     }
 
-    // Scratch function to reveal the image
-    function scratch(x: number, y: number) {
-      ctx!.globalCompositeOperation = "destination-out";
-      ctx!.beginPath();
-      ctx!.arc(x, y, brushRadius, 0, Math.PI * 2);
-      ctx!.fill();
-    }
+    // Scratch function is defined below
 
     // Event handlers
     function handleStart(event: MouseEvent | TouchEvent) {
@@ -160,9 +169,52 @@ import avatar from "../assets/mike-pp.png";
     canvasElement.addEventListener("touchend", handleEnd);
     canvasElement.addEventListener("touchcancel", handleEnd);
 
+    // Keep track of scratched areas
+    let scratchedPixels = new Set<string>();
+
+    // Function to record a scratch at a specific position
+    function recordScratch(x: number, y: number): void {
+      // Convert position to a string key for the Set
+      const key = `${Math.floor(x)},${Math.floor(y)}`;
+      scratchedPixels.add(key);
+    }
+
+    // Scratch function to reveal the image
+    function scratch(x: number, y: number): void {
+      ctx!.globalCompositeOperation = "destination-out";
+      ctx!.beginPath();
+      ctx!.arc(x, y, brushRadius, 0, Math.PI * 2);
+      ctx!.fill();
+
+      // Record this scratch
+      recordScratch(x, y);
+    }
+
+    // Function to reapply all scratches
+    function reapplyScratchedAreas(): void {
+      ctx!.globalCompositeOperation = "destination-out";
+
+      // Reapply each scratch
+      scratchedPixels.forEach((key: string) => {
+        const [x, y] = key.split(",").map(Number);
+        ctx!.beginPath();
+        ctx!.arc(x, y, brushRadius, 0, Math.PI * 2);
+        ctx!.fill();
+      });
+
+      // Reset composite operation
+      ctx!.globalCompositeOperation = "source-over";
+    }
+
     // Handle theme changes
     const observer = new MutationObserver(() => {
+      console.log("Theme changed, scratched areas:", scratchedPixels.size);
+
+      // Reset the canvas with new theme color
       setupCanvas();
+
+      // Reapply all scratches
+      reapplyScratchedAreas();
     });
     observer.observe(document.documentElement, {
       attributes: true,
@@ -171,8 +223,5 @@ import avatar from "../assets/mike-pp.png";
 
     // Initialize canvas
     setupCanvas();
-
-    // Resize handling
-    window.addEventListener("resize", setupCanvas);
   });
 </script>
