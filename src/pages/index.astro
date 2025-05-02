@@ -90,6 +90,17 @@ const workExperiences = [
   }
 ];
 ---
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const ofLink = document.querySelector("#of-link");
+    if (ofLink) {
+      ofLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.open("/of", "_blank");
+      });
+    }
+  });
+</script>
 <Layout>
   <div class=" font-sans transition-colors duration-300">
     <main class="">
@@ -106,7 +117,7 @@ const workExperiences = [
             <p class="flex gap-1.5 justify-center md:justify-start mt-1.5 text-xs text-gray-500 dark:text-gray-400">
               <a target="_blank" href="https://linkedin.com/in/meduave" aria-label="LinkedIn link">LinkedIn</a> | 
               <a target="_blank" href="/cv.pdf" aria-label="CV link">Resumé</a> | 
-              <a target="_blank" href="/of" aria-label="OF link">OnlyFans</a> | 
+              <a id="of-link" href="https://onlyfans.com/meduave" aria-label="OF link">OnlyFans</a> | 
               <a target="_blank" href="https://github.com/michaeljohneduave" aria-label="Github link">GitHub</a>
             </p>
           </div>
