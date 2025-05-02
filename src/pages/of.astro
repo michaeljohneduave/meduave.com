@@ -7,12 +7,14 @@ const cookie = Astro.cookies.get("astro")?.value;
 const homepage = new URL(Astro.request.url).searchParams.get("homepage");
 const ua = Astro.request.headers.get("User-Agent");
 
-if (cookie && !homepage && !isbot(ua)) {
-  await fetch(`${import.meta.env.KV_REST_API_URL}/sadd/visitors/${cookie}`, {
-    headers: {
-      Authorization: `Bearer ${import.meta.env.KV_REST_API_TOKEN}`,
-    },
-  });
+if (cookie) {
+  if (!homepage && !isbot(ua)) {
+    await fetch(`${import.meta.env.KV_REST_API_URL}/sadd/visitors/${cookie}`, {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.KV_REST_API_TOKEN}`,
+      },
+    });
+  }
 } else if (!cookie) {
   const cookie = randomUUID();
   Astro.cookies.set("astro", cookie, {
