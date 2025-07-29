@@ -36,6 +36,12 @@ const projects = [
     name: "Auto Apply",
     description: "Helps streamline job applications by automating the resume adjustment and thoughtfully filling up the application form by using the user’s provided context and static information.",
     github: "https://github.com/michaeljohneduave/auto-applai",
+    logo: {
+      light: "auto-apply-light.svg",
+      dark: "auto-apply-dark.svg",
+      height: 72,
+      width: 72
+    },
     show: true,
   },
   {
@@ -161,8 +167,8 @@ const workExperiences = [
                     {lightLogoImage && (
                       <Image
                         class="border-0 object-contain block dark:hidden"
-                        height="64"
-                        width="64"
+                        height={logo?.height || 64}
+                        width={logo?.width || 64}
                       src={lightLogoImage}
                       alt={`${name} logo (light mode)`}
                     />
@@ -170,8 +176,8 @@ const workExperiences = [
                   {darkLogoImage ? (
                     <Image
                       class="border-0 object-contain hidden dark:block"
-                      height="64"
-                      width="64"
+                      height={logo?.height || 64}
+                      width={logo?.width || 64}
                       src={darkLogoImage}
                       alt={`${name} logo (dark mode)`}
                     />
@@ -180,8 +186,8 @@ const workExperiences = [
                       // Fallback to light logo if dark logo is missing
                       <Image
                         class="border-0 object-contain hidden dark:block"
-                        height="64"
-                        width="64"
+                        height="128"
+                        width="128"
                         src={lightLogoImage}
                         alt={`${name} logo (fallback)`}
                       />
