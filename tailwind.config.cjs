@@ -8,6 +8,7 @@ module.exports = {
 				'dark-bg': '#13151a',
 			},
 			screens: {
+				'xxs': '320px',
 				'xs': '430px',
 			},
 		},
