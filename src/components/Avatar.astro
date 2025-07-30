@@ -18,7 +18,7 @@ import avatar from "../assets/mike-pp.png";
       widths={[256, 640]}
       sizes={`(max-width: 430px) 256px, 640px`}
       class="h-full w-full aspect-square transition-transform duration-300 rounded-xl scale-[0.99]"
-      loading="lazy"
+      loading="eager"
     />
     <canvas
       id="scratch-canvas"
@@ -173,12 +173,148 @@ import avatar from "../assets/mike-pp.png";
 
     // Keep track of scratched areas
     let scratchedPixels = new Set<string>();
+    let thresholdReached = false; // Prevent multiple triggers
+
+    // Function to calculate scratch percentage
+    function calculateScratchPercentage(): number {
+      const totalPixels = canvasElement.width * canvasElement.height;
+
+      // Get the actual canvas data to count scratched pixels
+      const imageData = ctx!.getImageData(
+        0,
+        0,
+        canvasElement.width,
+        canvasElement.height,
+      );
+      const data = imageData.data;
+
+      let scratchedPixels = 0;
+      // Count transparent pixels (scratched areas)
+      for (let i = 3; i < data.length; i += 4) {
+        if (data[i] === 0) {
+          // Alpha channel is 0 (transparent)
+          scratchedPixels++;
+        }
+      }
+
+      const percentage = (scratchedPixels / totalPixels) * 100;
+      console.log(
+        `Scratched pixels: ${scratchedPixels}, Total pixels: ${totalPixels}, Percentage: ${percentage.toFixed(1)}%`,
+      );
+      return Math.min(percentage, 100); // Cap at 100%
+    }
+
+    // Function to check threshold and trigger callback
+    function checkThreshold(): void {
+      if (thresholdReached) return; // Already triggered
+
+      const percentage = calculateScratchPercentage();
+      if (percentage >= 65) {
+        thresholdReached = true;
+        triggerConfetti(2.5);
+      }
+    }
+
+    // Function to trigger confetti effect
+    function triggerConfetti(speed: number = 1): void {
+      // Get the avatar canvas position
+      const canvasRect = canvasElement.getBoundingClientRect();
+      const startX = canvasRect.left + canvasRect.width / 2;
+      const startY = canvasRect.top + canvasRect.height / 2;
+
+      // Create confetti container
+      const confettiContainer = document.createElement("div");
+      confettiContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+        overflow: hidden;
+      `;
+      document.body.appendChild(confettiContainer);
+
+      // Create confetti pieces
+      const colors = [
+        "#ff6b6b",
+        "#4ecdc4",
+        "#45b7d1",
+        "#96ceb4",
+        "#feca57",
+        "#ff9ff3",
+        "#54a0ff",
+        "#5f27cd",
+      ];
+      const confettiCount = 150;
+
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement("div");
+        // const angle = (Math.PI * 2 * i) / confettiCount; // Distribute in a circle
+        // const velocity = (Math.random() * 100 + 50) * speed; // Apply speed multiplier
+        // const endX = startX + Math.cos(angle) * velocity;
+        // const endY = startY + Math.sin(angle) * velocity; // Remove downward bias
+
+        confetti.style.cssText = `
+          position: absolute;
+          width: ${Math.random() * 10 + 5}px;
+          height: ${Math.random() * 10 + 5}px;
+          background: ${colors[Math.floor(Math.random() * colors.length)]};
+          left: ${startX}px;
+          top: ${startY}px;
+          border-radius: ${Math.random() > 0.5 ? "50%" : "0"};
+          animation: confetti-explosion-${i} ${(Math.random() * 3 + 2) / speed}s ease-out forwards;
+          transform: rotate(${Math.random() * 360}deg);
+        `;
+        confettiContainer.appendChild(confetti);
+      }
+
+      // Add CSS animation for each confetti piece
+      if (!document.getElementById("confetti-styles")) {
+        const style = document.createElement("style");
+        style.id = "confetti-styles";
+        style.textContent = "";
+
+        for (let i = 0; i < confettiCount; i++) {
+          const angle = (Math.PI * 2 * i) / confettiCount;
+          const velocity = (Math.random() * 100 + 50) * speed;
+          const endX = Math.cos(angle) * velocity;
+          const endY = Math.sin(angle) * velocity; // Remove downward bias
+
+          style.textContent += `
+            @keyframes confetti-explosion-${i} {
+              0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+              }
+              100% {
+                transform: translate(${endX}px, ${endY}px) rotate(720deg);
+                opacity: 0;
+              }
+            }
+          `;
+        }
+
+        document.head.appendChild(style);
+      }
+
+      // Remove confetti after animation
+      setTimeout(() => {
+        if (confettiContainer.parentNode) {
+          confettiContainer.parentNode.removeChild(confettiContainer);
+        }
+      }, 5000 / speed); // Adjust cleanup time based on speed
+    }
 
     // Function to record a scratch at a specific position
     function recordScratch(x: number, y: number): void {
       // Convert position to a string key for the Set
       const key = `${Math.floor(x)},${Math.floor(y)}`;
       scratchedPixels.add(key);
+
+      // Check threshold after each scratch
+      checkThreshold();
     }
 
     // Scratch function to reveal the image
