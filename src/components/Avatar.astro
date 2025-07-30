@@ -4,7 +4,7 @@ import avatar from "../assets/mike-pp.png";
 ---
 
 <div
-  class="relative flex h-28 w-28 flex-col items-center justify-center rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700"
+  class="flex md:w-40 sm:w-32 flex-col items-center justify-center rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700"
 >
   <div
     id="scratch-container"
@@ -15,16 +15,16 @@ import avatar from "../assets/mike-pp.png";
       id="avatar-image"
       src={avatar}
       alt="Michael Eduave"
-      widths={[256, 640]}
-      sizes={`(max-width: 430px) 256px, 640px`}
+      widths={[320, 640]}
+      sizes={`(max-width: 320px) 200px, (max-width: 430px) 256px, 640px`}
       class="h-full w-full aspect-square transition-transform duration-300 rounded-xl scale-[0.99]"
       loading="eager"
     />
     <canvas
       id="scratch-canvas"
       class="absolute top-0 left-0 w-full h-full z-10 eraser-cursor"
-      width="256"
-      height="256"></canvas>
+      width="320"
+      height="320"></canvas>
 
     <style>
       .eraser-cursor {

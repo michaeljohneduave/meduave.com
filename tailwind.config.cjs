@@ -7,6 +7,9 @@ module.exports = {
 			colors: {
 				'dark-bg': '#13151a',
 			},
+			screens: {
+				'xs': '430px',
+			},
 		},
 	},
 	plugins: [],

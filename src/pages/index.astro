@@ -22,7 +22,7 @@ const logoImports = import.meta.glob<{ default: ImageMetadata }>(
 const projects = [
   {
     name: "Pearl Chat",
-    description: "AI-native assistant (chat and voice) that manages daily life logistics, with personas for tasks including event scheduling, pantry management, and personal finance. Aimed to support individuals and groups.",
+    description: "AI-native assistant (chat and voice) that manages daily life logistics, with personas for tasks including event scheduling, pantry management, and personal finance.",
     logo: {
       light: "pearl.svg",
       dark: "pearl.svg"
@@ -125,11 +125,11 @@ const workExperiences = [
           <Avatar />
           <!-- Text Content -->
           <div class="text-center md:text-left">
-            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Michael Eduave</h1>
-            <p class="mt-1 text-xs text-gray-600 dark:text-gray-300">
-              Currently working on projects using TypeScript, React, AWS, and exploring GenAI applications.
+            <h1 class="text-3xl font-semibold text-gray-900 dark:text-white">Michael Eduave</h1>
+            <p class="mt-1 text-md text-gray-600 dark:text-gray-300">
+              Currently working on projects using TypeScript, React, AWS, and GenAI applications.
             </p>
-            <p class="flex gap-1.5 justify-center md:justify-start mt-1.5 text-xs text-gray-500 dark:text-gray-400">
+            <p class="flex gap-1.5 justify-center md:justify-start mt-1.5 text-md text-gray-500 dark:text-gray-400">
               <a target="_blank" href="https://linkedin.com/in/meduave" aria-label="LinkedIn link">LinkedIn</a> | 
               <a target="_blank" href="/cv.pdf" aria-label="CV link">Resumé</a> | 
               <a id="of-link" href="https://onlyfans.com/meduave" aria-label="OF link">OnlyFans</a> | 
@@ -141,7 +141,7 @@ const workExperiences = [
 
       <!-- Project Section -->
       <section class="mb-8">
-        <h2 class="mb-3 text-xl font-medium text-gray-800 dark:text-gray-200">Projects</h2>
+        <h2 class="mb-3 text-md font-medium text-gray-800 dark:text-gray-200">Projects</h2>
         <div>
           {projects.map(({ name, logo, description, url, github}) => {
             // Handle both string and object logo formats for backward compatibility
@@ -204,11 +204,11 @@ const workExperiences = [
                 {/* Text Content */}
                 <div class="text-left">
                   <a target="_blank" href={url} aria-label={`Project link to ${name}`}>
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-200">{name}</h3>
-                  <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-300">
+                    <h3 class="text-md font-semibold text-gray-900 dark:text-gray-200">{name}</h3>
+                  <p class="mt-0.5 text-md text-gray-600 dark:text-gray-300">
                     {description}
                   </p>
-                  <p class="text-xs mt-1">
+                  <p class="text-md mt-1">
                     {github && (
                       <a class="flex gap-1 text-gray-500 dark:text-gray-400" target="_blank" href={github} aria-label={`GitHub link to ${name}`}>
                         Github <Icon name="mdi:external-link" class="text-gray-500 dark:text-gray-400 h-4 w-4 self-center" />
@@ -225,7 +225,7 @@ const workExperiences = [
 
       <!-- Work Section -->
       <section>
-        <h2 class="mb-3 text-xl font-medium text-gray-800 dark:text-gray-100">Work Experience</h2>
+        <h2 class="mb-3 text-md font-medium text-gray-800 dark:text-gray-100">Work Experience</h2>
         <div>
           {workExperiences.map((work) => (
             <div class="flex gap-3 md:items-start md:gap-4 rounded-md p-2.5">
@@ -235,8 +235,11 @@ const workExperiences = [
               </div> */}
               <!-- Text Content -->
               <div class="text-left">
-                <h3 class="text-md font-medium text-gray-900 dark:text-gray-100">{work.role} at {work.name} <span class="text-xs text-gray-500 dark:text-gray-400">{work.year}</span></h3>
-                <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-300">
+                <div class="text-md font-medium text-gray-900 dark:text-gray-100 flex flex-wrap xs:flex-col sm:flex-row sm:gap-2">
+                  <span class="text-md">{work.role} at {work.name}</span>
+                  <span class="text-md sm:self-center text-gray-500 dark:text-gray-400">{work.year}</span>
+                </div>
+                <p class="mt-0.5 text-md text-gray-600 dark:text-gray-300">
                   {work.description}
                 </p>
               </div>
